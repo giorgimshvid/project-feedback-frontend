@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 interface ButtonProps {
     type: 'submit' | 'button' | 'reset';
     variant: 'primary' | 'secondary';
-    handleClick: () => void;
+    handleClick?: () => void;
     children: ReactNode;
 }
 
