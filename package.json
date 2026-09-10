@@ -10,9 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "formik": "^2.4.9",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "react-router-dom": "^7.18.3"
+    "react-router-dom": "^7.18.3",
+    "zod": "^4.6.1",
+    "zod-formik-adapter": "^2.0.0"
   },
   "devDependencies": {
     "@types/node": "^24.13.3",
