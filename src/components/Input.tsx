@@ -12,9 +12,14 @@ interface InputProps {
   id: string
   required?: boolean
   label: string
+  error?: string
+  touched?: boolean
+  onBlur?: () => void
 }
 
-export default function Input({ handleChange, type = "text", placeholder, value, name, id, required, label }: InputProps) {
+
+export default function Input({ handleChange, type = "text", placeholder, value, name, id, required, label, error, touched, onBlur }: InputProps) {
+  const hasError = Boolean(error && touched)
   return (
     <label className="flex flex-col gap-1.5 w-full max-w-sm text-sm font-bold text-black">
       {label}
@@ -25,9 +30,20 @@ export default function Input({ handleChange, type = "text", placeholder, value,
         placeholder={placeholder}
         value={value}
         name={name}
+        onBlur={onBlur}
         required={required}
-        className="w-full bg-[#EBF3FE] text-gray-800 text-sm border border-gray-700 px-3 py-2 rounded-none focus:outline-none focus:ring-1 focus:ring-blue-500"
+        className={`w-full
+           bg-[#EBF3FE]
+           ${hasError ? "border-red-500" : "border-gray-700"}
+           text-gray-800 text-sm border  px-3 py-2 rounded-none focus:outline-none `}
       />
+      {
+        hasError && (
+          <span className="text-xs text-red-500">
+            {error}
+          </span>
+        )
+      }
     </label>
   )
 }

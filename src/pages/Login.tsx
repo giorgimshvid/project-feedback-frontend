@@ -9,6 +9,8 @@ const Login = () => {
   const handleSubmit = () => {
     alert("Success")
   }
+
+
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4">
         <div className="w-full max-w-sm bg-white  rounded-lg shadow-sm border border-gray-200">
@@ -24,6 +26,7 @@ const Login = () => {
               name={"email"}
               id={"email"}
               label={"Email"}
+              error={"Error"}
               required
             />
             <Input
@@ -34,6 +37,7 @@ const Login = () => {
               name={"password"}
               id={"password"}
               label={"Password"}
+              error={"Error"}
               required
             />
             <Button
