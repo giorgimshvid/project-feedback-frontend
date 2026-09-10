@@ -10,7 +10,7 @@ export interface RegisterRequest {
   lastName: string;
   email: string;
   password: string;
-  confinrmPassword: string;
+  confirmPassword: string;
 }
 
 export interface RegisterResponse {

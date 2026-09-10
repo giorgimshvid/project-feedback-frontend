@@ -5,9 +5,9 @@ import { request } from "./app.client";
 class AuthServices {
   async register(data : RegisterRequest) : Promise<RegisterResponse> {
     return request<RegisterResponse>(
-      "api/auth/register", 
+      "api/auth/register",
       {
-        method: "POST", 
+        method: "POST",
         body: JSON.stringify(data)
       }
     )
@@ -23,3 +23,5 @@ class AuthServices {
     )
   }
 }
+
+export const authService = new AuthServices()

@@ -4,7 +4,7 @@ import type { ChangeEvent } from "react"
 
 
 interface InputProps {
-  handleChange: (e: ChangeEvent<HTMLInputElement>) => void
+  handleChange?: (e: ChangeEvent<HTMLInputElement>) => void
   type: "text" | "password" | "email" | "checkbox"
   placeholder?: string
   value?: string
@@ -18,7 +18,7 @@ interface InputProps {
 }
 
 
-export default function Input({ handleChange, type = "text", placeholder, value, name, id, required, label, error, touched, onBlur }: InputProps) {
+export default function Input({ handleChange, type = "text", placeholder, id, required, label, error, touched, onBlur }: InputProps) {
   const hasError = Boolean(error && touched)
   return (
     <label className="flex flex-col gap-1.5 w-full max-w-sm text-sm font-bold text-black">
@@ -28,10 +28,9 @@ export default function Input({ handleChange, type = "text", placeholder, value,
         type={type}
         onChange={handleChange}
         placeholder={placeholder}
-        value={value}
-        name={name}
         onBlur={onBlur}
         required={required}
+
         className={`w-full
            bg-[#EBF3FE]
            ${hasError ? "border-red-500" : "border-gray-700"}
