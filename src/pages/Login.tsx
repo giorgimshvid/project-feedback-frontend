@@ -1,14 +1,40 @@
-import { useState } from "react"
 import Input from "../components/Input"
 import Button from "../components/Button"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useFormik } from "formik"
+import { toFormikValidationSchema } from "zod-formik-adapter"
+import { loginValidationSchema } from "../utils/validations"
+import type { LoginRequest } from "../models/AuthProps"
+import { authService } from "../services/auth.service"
+import { useDispatch } from "react-redux"
+import { setCredentials } from "../store/slices/authSlice"
 
 const Login = () => {
-  const [emailValue, setEmailValue] = useState("")
-  const [passValue, setPassValue] = useState("")
-  const handleSubmit = () => {
-    alert("Success")
-  }
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: ''
+    },
+    validationSchema: toFormikValidationSchema(loginValidationSchema),
+    onSubmit: async (value: LoginRequest, {setStatus, setSubmitting}) => {
+      try {
+        const response = await authService.login(value)
+        if (response?.user) {
+          dispatch(setCredentials(response.user))
+        }
+        navigate('/')
+      } catch (e) {
+        const err = e instanceof Error ? e : new Error(String(e))
+        setStatus(err.message || 'არასწორი მეილი ან პასსვორდი')
+      } finally {
+        setSubmitting(false)
+      }
+    }
+  })
 
 
     return (
@@ -17,34 +43,38 @@ const Login = () => {
           <div className="bg-[#2f323d] py-5">
             <h2 className="text-white text-center text-2xl font-bold">Log In</h2>
           </div>
-          <form onSubmit={handleSubmit} className="flex px-4 py-5 flex-col gap-4">
+          <form onSubmit={formik.handleSubmit} className="flex px-4 py-5 flex-col gap-4">
             <Input
-              handleChange={(e) => setEmailValue(e.target.value)}
               type={"email"}
               placeholder="test@example.com"
-              value={emailValue}
-              name={"email"}
               id={"email"}
+              name={"email"}
               label={"Email"}
-              error={"Error"}
+              value={formik.values.email}
+              handleChange={formik.handleChange}
+              onBlur={() => formik.setFieldTouched('email')}
+              error={formik.errors.email}
+              touched={formik.touched.email}
               required
             />
             <Input
-              handleChange={(e) => setPassValue(e.target.value)}
               type={"password"}
               placeholder="*********"
-              value={passValue}
-              name={"password"}
               id={"password"}
+              name={"password"}
               label={"Password"}
-              error={"Error"}
+              value={formik.values.password}
+              handleChange={formik.handleChange}
+              error={formik.errors.password}
+              onBlur={() => formik.setFieldTouched('password')}
+              touched={formik.touched.password}
               required
             />
             <Button
               type={"submit"}
               variant={"primary"}
             >
-              Log In
+              {formik.isSubmitting ? 'Logining...' : 'Login'}
             </Button>
           </form>
 
