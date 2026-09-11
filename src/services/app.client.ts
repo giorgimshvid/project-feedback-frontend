@@ -5,7 +5,7 @@ const APP_URL = ENV.API_URL;
 export async function request<T>(endpoint : string, options : RequestInit = {}) : Promise<T> {
   const headers = new Headers(options.headers);
   // This will make sure that the data we send is a JSON.
-  if (headers.has("Content-Type")) headers.set("Content-Type", "application/json");
+  if (!headers.has("Content-Type")) headers.set("Content-Type", "application/json");
 
   let data = undefined;
   try {
