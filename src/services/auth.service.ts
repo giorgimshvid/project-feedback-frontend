@@ -24,7 +24,7 @@ class AuthServices {
   }
 
   async getMe(): Promise<{ user: User }> {
-    return request<{ user: User }>("/api/auth/me", { method: "GET" });
+    return request<{ user: User }>("api/auth/me", { method: "GET" });
   }
 }
 

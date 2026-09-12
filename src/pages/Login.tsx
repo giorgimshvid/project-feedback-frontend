@@ -26,7 +26,7 @@ const Login = () => {
         if (response?.user) {
           dispatch(setCredentials(response.user))
         }
-        navigate('/')
+        navigate('/dashboard')
       } catch (e) {
         const err = e instanceof Error ? e : new Error(String(e))
         setStatus(err.message || 'არასწორი მეილი ან პასსვორდი')
