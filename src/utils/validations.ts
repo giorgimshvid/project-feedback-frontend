@@ -39,3 +39,19 @@ export const loginValidationSchema = z.object({
 		.regex(/[a-z]/, {message: "Password must have at least one small char"})
 		.regex(/[0-9]/, {message: "The password must have at least one number"}),
 });
+
+export const projectValidationSchema = z.object({
+  name: z
+    .string({ error: "First Name is required. " })
+    .min(3, { message: "The First Name must be minimum 3 characters." })
+    .max(20, { message: "The First Name must not be more than 20 characters." })
+    .trim(),
+  description: z
+    .string({ error: "First Name is required. " })
+    .min(3, { message: "The First Name must be minimum 3 characters." })
+    .max(20, { message: "The First Name must not be more than 20 characters." })
+    .trim(),
+  status: z
+    .string({ error: "Status is required" })
+    .trim()
+});
