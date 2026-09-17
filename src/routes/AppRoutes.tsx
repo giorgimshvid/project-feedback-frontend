@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ProtectedRoute } from "../components/ProtectedRoute";
-import { Dashboard } from "../pages/Dashboard";
+import Landing from "../pages/Landing";
 import Login from "../pages/Login";
 
 export const AppRoutes = () => {
@@ -8,12 +8,12 @@ export const AppRoutes = () => {
     <Routes>
       <Route path="/login" element={<Login />} />
 
-      {/* Dashboard-ის დაცული მარშრუტი */}
+      {/* Landing / Dashboard-ის დაცული მარშრუტი */}
       <Route
         path="/dashboard"
         element={
           <ProtectedRoute>
-            <Dashboard />
+            <Landing />
           </ProtectedRoute>
         }
       />
