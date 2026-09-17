@@ -1,19 +1,25 @@
-import { createBrowserRouter } from "react-router-dom";
-import Landing from "../pages/Landing";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { ProtectedRoute } from "../components/ProtectedRoute";
+import { Dashboard } from "../pages/Dashboard";
 import Login from "../pages/Login";
-import Signup from "../pages/Signup";
 
-export const appRouter = createBrowserRouter([
-    {
-        path: '/',
-        element: <Landing />
-    },
-    {
-        path: '/login',
-        element: <Login />
-    },
-    {
-        path: '/signup',
-        element: <Signup />
-    }
-])
+export const AppRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+
+      {/* Dashboard-ის დაცული მარშრუტი */}
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Catch-all (*) — ნებისმიერ უცნობ URL-ზე გადამისამართება */}
+      <Route path="*" element={<Navigate to="/dashboard" replace />} />
+    </Routes>
+  );
+};
