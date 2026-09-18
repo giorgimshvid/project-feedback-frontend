@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { projectService } from "../services/project.service";
 import type { Project } from "../models/ProjectProps";
 import { logoutUser } from "../store/slices/authSlice";
+import { authService } from "../services/auth.service";
 
 export const Dashboard = () => {
 
@@ -14,6 +15,7 @@ export const Dashboard = () => {
 
     const [projects, setProjects] = useState<Project[]>([]);
     const [loadingProject, setloadingProject] = useState<boolean>(false);
+    const [projectModal, setProjectModal] = useState<boolean>(false);
 
     const { user, isAuthenticated} = useSelector((state: RootState) => state.auth);
 
@@ -41,7 +43,12 @@ export const Dashboard = () => {
         }
     }, [isAuthenticated]);
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
+        try {
+            await authService.logout();
+        } catch(error) {
+            console.log(error);
+        } 
         dispatch(logoutUser())
         navigate('/login') 
     }

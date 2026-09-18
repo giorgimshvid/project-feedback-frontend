@@ -26,6 +26,10 @@ class AuthServices {
   async getMe(): Promise<{ user: User }> {
     return request<{ user: User }>("api/auth/me", { method: "GET" });
   }
+
+  async logout(): Promise<void> {
+    return request<void>("api/auth/logout", {method: 'POST'});
+  }
 }
 
 export const authService = new AuthServices();
