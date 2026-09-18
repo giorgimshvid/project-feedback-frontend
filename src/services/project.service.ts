@@ -1,4 +1,4 @@
-import type { Project, ProjectRequest, ProjectResponse } from "../models/ProjectProps";
+import type { Project, ProjectEditResponse, ProjectRequest, ProjectResponse } from "../models/ProjectProps";
 import { request } from "./app.client";
 
 class ProjectService {
@@ -14,6 +14,20 @@ class ProjectService {
       body: JSON.stringify(data),
     });
   }
+
+  async editProject( id: number, data: ProjectRequest ): Promise<ProjectEditResponse> {
+    return request<ProjectEditResponse>(`api/projects/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data)
+    });
+  }
+
+  async deleteProject(id: number): Promise<ProjectEditResponse> {
+    return request<ProjectEditResponse>(`api/projects/${id}`, {
+      method: 'DELETE'
+    });
+  }
+
 }
 
 

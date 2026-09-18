@@ -7,6 +7,7 @@ import { projectService } from "../services/project.service";
 import type { Project } from "../models/ProjectProps";
 import { logoutUser } from "../store/slices/authSlice";
 import { authService } from "../services/auth.service";
+import ProjectModal from "../components/ProjectModal";
 
 export const Dashboard = () => {
 
@@ -14,6 +15,7 @@ export const Dashboard = () => {
     const navigate = useNavigate();
 
     const [projects, setProjects] = useState<Project[]>([]);
+    const [project, setProject] = useState<Project | null>(null);
     const [loadingProject, setloadingProject] = useState<boolean>(false);
     const [projectModal, setProjectModal] = useState<boolean>(false);
 
@@ -53,7 +55,15 @@ export const Dashboard = () => {
         navigate('/login') 
     }
 
-    console.log(projects);
+    const handleAddOrEditProject = () => {
+        setProjectModal(true);
+    }
+
+    // const handleAddProject = (data: Project) => {
+    //     setProject(data);
+    // }
+
+    // console.log(projects);
 
     return (
         <>
@@ -71,7 +81,7 @@ export const Dashboard = () => {
             <main>
                 <div>
                     <div className="add-btn-wrap flex justify-center my-6">
-                        <button className="logout-btn text-white px-4 py-2 bg-emerald-600">Add Project</button>
+                        <button className="logout-btn text-white px-4 py-2 bg-emerald-600" onClick={handleAddOrEditProject}>Add Project</button>
                     </div>
                     <div className="projects-wrap w-full">
                         {   
@@ -89,6 +99,12 @@ export const Dashboard = () => {
                     </div>
                 </div>
             </main>
+            <ProjectModal 
+                onClose={() => setProjectModal(false)}
+                isOpened={projectModal}
+                onProjectSave={fetchProjects}
+                project={project}
+            />
         </>
     )
 }
