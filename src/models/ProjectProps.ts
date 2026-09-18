@@ -2,7 +2,7 @@ export interface Project {
   id: number
   name: string
   description: string
-  status: string
+  status: 'active' | 'on going' | 'completed'
   ownerId: number
   createdAt: string
 }
