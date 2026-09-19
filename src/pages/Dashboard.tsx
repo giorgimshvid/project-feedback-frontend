@@ -19,13 +19,13 @@ export const Dashboard = () => {
     const [loadingProject, setloadingProject] = useState<boolean>(false);
     const [projectModal, setProjectModal] = useState<boolean>(false);
 
-    const { user, isAuthenticated} = useSelector((state: RootState) => state.auth);
+    const { user, isAuthenticated, isLoading} = useSelector((state: RootState) => state.auth);
 
     useEffect(() => {
-        if(!isAuthenticated) {
+      if (!isLoading && !isAuthenticated) {
             navigate('/login')
         }
-    }, [isAuthenticated, navigate])
+    }, [isAuthenticated, navigate, isLoading])
 
     const fetchProjects = async () => {
         try {
@@ -50,9 +50,9 @@ export const Dashboard = () => {
             await authService.logout();
         } catch(error) {
             console.log(error);
-        } 
+        }
         dispatch(logoutUser())
-        navigate('/login') 
+        navigate('/login')
     }
 
     const handleAddOrEditProject = () => {
@@ -75,7 +75,7 @@ export const Dashboard = () => {
                     <p>{user?.email}</p>
                 </div>
                 <div className="logout-btn text-white px-4 py-2 bg-emerald-600">
-                   <button onClick={handleLogout}>Logout</button> 
+                   <button onClick={handleLogout}>Logout</button>
                 </div>
             </header>
             <main>
@@ -84,10 +84,10 @@ export const Dashboard = () => {
                         <button className="logout-btn text-white px-4 py-2 bg-emerald-600" onClick={handleAddOrEditProject}>Add Project</button>
                     </div>
                     <div className="projects-wrap w-full">
-                        {   
+                        {
                             loadingProject ? <p className="text-center my-5">Projects are loading...</p> :
-                            
-                            projects?.length === 0  ? <p className="text-center my-5">Projects are not added yet</p> : projects.map(proj => 
+
+                  projects?.length === 0 ? <p className="text-center my-5">Projects are not added yet</p> : (projects ?? []).map(proj =>
                                 <div>
                                     <p>name: {proj.name}</p>
                                     <p>description: {proj.description}</p>
@@ -99,7 +99,7 @@ export const Dashboard = () => {
                     </div>
                 </div>
             </main>
-            <ProjectModal 
+            <ProjectModal
                 onClose={() => setProjectModal(false)}
                 isOpened={projectModal}
                 onProjectSave={fetchProjects}

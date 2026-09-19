@@ -4,6 +4,7 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import { Dashboard } from "../pages/Dashboard";
 import { store } from "../store/store";
+import { requiredAuthLoader } from "./authLoader";
 
 export const appRouter = createBrowserRouter([
     {
@@ -20,13 +21,7 @@ export const appRouter = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        loader: () => {
-            const isAuthenticated = store.getState().auth.isAuthenticated;
-            if (!isAuthenticated) {
-                return redirect('/Login');
-            }
-            return null;
-        },
+        loader: requiredAuthLoader,
         element: <Dashboard />
     }
 ])
