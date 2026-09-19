@@ -5,7 +5,7 @@ import { store } from "../store/store"
 
 export const requiredAuthLoader = async () => {
   const isAutentication = store.getState().auth.isAuthenticated
-  if (isAutentication) return 
+  if (isAutentication) return null
   try {
     const res = await authService.getMe()
     if (res?.user) {

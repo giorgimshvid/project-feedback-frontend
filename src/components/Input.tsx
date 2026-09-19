@@ -18,7 +18,7 @@ interface InputProps {
 }
 
 
-export default function Input({ handleChange, type = "text", placeholder, id, required, label, error, touched, onBlur }: InputProps) {
+export default function Input({ handleChange, type = "text", placeholder, id, required, value, label, name, error, touched, onBlur }: InputProps) {
   const hasError = Boolean(error && touched)
   return (
     <label className="flex flex-col gap-1.5 w-full max-w-sm text-sm font-bold text-black">
@@ -26,6 +26,8 @@ export default function Input({ handleChange, type = "text", placeholder, id, re
       <input
         id={id}
         type={type}
+        value={value}
+        name={name}
         onChange={handleChange}
         placeholder={placeholder}
         onBlur={onBlur}

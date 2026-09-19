@@ -55,7 +55,12 @@ export const Dashboard = () => {
         navigate('/login')
     }
 
-    const handleAddOrEditProject = () => {
+    const handleOpenAddModal = () => {
+        setProject(null);
+        setProjectModal(true);
+    }
+    const handleOpenEditAddModal = (selectedProject: Project) => {
+        setProject(selectedProject);
         setProjectModal(true);
     }
 
@@ -81,7 +86,7 @@ export const Dashboard = () => {
             <main>
                 <div>
                     <div className="add-btn-wrap flex justify-center my-6">
-                        <button className="logout-btn text-white px-4 py-2 bg-emerald-600" onClick={handleAddOrEditProject}>Add Project</button>
+                        <button className="logout-btn text-white px-4 py-2 bg-emerald-600" onClick={handleOpenAddModal}>Add Project</button>
                     </div>
                     <div className="projects-wrap w-full">
                         {
