@@ -83,22 +83,27 @@ export const Dashboard = () => {
                    <button onClick={handleLogout}>Logout</button>
                 </div>
             </header>
-            <main>
-                <div>
+            <main className="min-h-screen bg-slate-50 px-6 pb-12">
+                <div className="mx-auto max-w-7xl">
                     <div className="add-btn-wrap flex justify-center my-6">
                         <button className="logout-btn text-white px-4 py-2 bg-emerald-600" onClick={handleOpenAddModal}>Add Project</button>
                     </div>
-                    <div className="projects-wrap w-full">
+                    <div className="projects-wrap w-full flex justify-around flex-wrap">
                         {
-                            loadingProject ? <p className="text-center my-5">Projects are loading...</p> :
+                            loadingProject ? <p className="text-center my-5 text-slate-500">Projects are loading...</p> :
 
-                  projects?.length === 0 ? <p className="text-center my-5">Projects are not added yet</p> : (projects ?? []).map(proj =>
-                                <div>
-                                    <p>name: {proj.name}</p>
-                                    <p>description: {proj.description}</p>
-                                    <p>status: {proj.status}</p>
-                                    <p>createdAt: {proj.createdAt}</p>
+                  projects?.length === 0 ? <p className="text-center my-5 text-slate-500">Projects are not added yet</p> : (projects ?? []).map(proj =>
+                                <div
+                                    key={proj.id}
+                                    onClick={() => handleOpenEditAddModal(proj)}
+                                    className="group flex basis-[23%] cursor-pointer flex-col gap-3 rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md"
+                                >
+                                    <p className="text-lg font-semibold text-slate-900 transition-colors group-hover:text-emerald-700">name: {proj.name}</p>
+                                    <p className="line-clamp-3 text-sm leading-relaxed text-slate-600">description: {proj.description}</p>
+                                    <p className={`w-fit rounded-full px-3 py-1 text-xs font-medium uppercase tracking-wide text-white ${proj.status === 'active' ? 'bg-emerald-400' : proj.status === 'archived' ? 'bg-gray-400' : 'bg-blue-400' }`}>status: {proj.status}</p>
+                                    <p className="mt-auto border-t border-slate-100 pt-3 text-xs text-slate-400">createdAt: {proj.createdAt}</p>
                                 </div>
+                                // status: 'active' | 'archived' | 'completed'
                             )
                         }
                     </div>
