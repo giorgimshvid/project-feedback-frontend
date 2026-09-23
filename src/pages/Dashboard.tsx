@@ -101,6 +101,10 @@ export const Dashboard = () => {
                                     <p className="text-lg font-semibold text-slate-900 transition-colors group-hover:text-emerald-700">name: {proj.name}</p>
                                     <p className="line-clamp-3 text-sm leading-relaxed text-slate-600">description: {proj.description}</p>
                                     <p className={`w-fit rounded-full px-3 py-1 text-xs font-medium uppercase tracking-wide text-white ${proj.status === 'active' ? 'bg-emerald-400' : proj.status === 'archived' ? 'bg-gray-400' : 'bg-blue-400' }`}>status: {proj.status}</p>
+                                    <div className="flex gap-x-2 mt-2">
+                                        <button className="logout-btn text-white px-3 py-1 bg-blue-600">Edit</button>
+                                        <button className="logout-btn text-white px-3 py-1 bg-red-600">Delete</button>
+                                    </div>
                                     <p className="mt-auto border-t border-slate-100 pt-3 text-xs text-slate-400">createdAt: {proj.createdAt}</p>
                                 </div>
                                 // status: 'active' | 'archived' | 'completed'
