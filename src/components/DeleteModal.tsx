@@ -20,22 +20,24 @@ const DeleteModal = ({ projectName, onClose, onConfirm }: DeleteModalProps) => {
                 <h2>
                     { projectName }
                 </h2>
-                <h3>Are you sure you want to delete the project card?</h3>
-                <div className="flex gap-x-4">
-                    <Button 
-                        type="button"
-                        variant={"primary"}
-                        handleClick={onConfirm}
-                        >
-                        Delete
-                    </Button>
-                    <Button 
-                        type="button"
-                        variant={"secondary"}
-                        handleClick={() => onClose(false)}
-                        >
-                        Cancel
-                    </Button>
+                <div className="modal-content relative z-10">
+                    <h3 className="text-white text-2xl mb-6">Are you sure you want to delete the project card?</h3>
+                    <div className="flex gap-x-4">
+                        <Button 
+                            type="button"
+                            variant={"primary"}
+                            handleClick={onConfirm}
+                            >
+                            Delete
+                        </Button>
+                        <Button 
+                            type="button"
+                            variant={"secondary"}
+                            handleClick={() => onClose(false)}
+                            >
+                            Cancel
+                        </Button>
+                    </div>
                 </div>
             </div>
         </>
