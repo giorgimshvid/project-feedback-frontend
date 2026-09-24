@@ -3,9 +3,9 @@ import type { Project, ProjectRequest } from "../models/ProjectProps";
 import { toFormikValidate, toFormikValidationSchema } from "zod-formik-adapter";
 import { projectValidationSchema } from "../utils/validations";
 import { projectService } from "../services/project.service";
-import Input from "./Input";
+import Input from "../shared/ui/Input";
 import { useEffect } from "react";
-import Button from "./Button";
+import Button from "../shared/ui/Button";
 
 interface ProjectModalProps {
     onClose: (projectModal: boolean) => void;

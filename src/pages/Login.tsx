@@ -1,5 +1,5 @@
-import Input from "../components/Input"
-import Button from "../components/Button"
+import Input from "../shared/ui/Input"
+import Button from "../shared/ui/Button"
 import { Link, useNavigate } from "react-router-dom"
 import { useFormik } from "formik"
 import { toFormikValidationSchema } from "zod-formik-adapter"

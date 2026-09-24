@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom"
-import Button from "../components/Button"
-import Input from "../components/Input"
+import Button from "../shared/ui/Button"
+import Input from "../shared/ui/Input"
 import { useFormik } from "formik"
 import { authService } from "../services/auth.service"
 import { toFormikValidationSchema } from "zod-formik-adapter"
