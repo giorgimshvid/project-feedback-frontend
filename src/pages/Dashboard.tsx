@@ -109,21 +109,22 @@ export const Dashboard = () => {
                     <div className="add-btn-wrap flex justify-center">
                         <button className="logout-btn text-white mb-6 px-4 py-2 bg-emerald-600" onClick={handleOpenAddModal}>Add Project</button>
                     </div>
-                    <div className="projects-wrap w-full flex justify-around flex-wrap">
+                    <div className="projects-wrap w-full flex justify-around flex-wrap cursor-pointer gap-y-6">
                         {
                             loadingProject ? <p className="text-center my-5 text-slate-500">Projects are loading...</p> :
 
                   projects?.length === 0 ? <p className="text-center my-5 text-slate-500">Projects are not added yet</p> : (projects ?? []).map(proj =>
                                 <div
                                     key={proj.id}
+                                    onClick={() => navigate(`/projects/${proj.id}`)}
                                     className="group flex basis-[23%] flex-col gap-3 rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-emerald-300 hover:shadow-md"
                                 >
                                     <p className="text-lg font-semibold text-slate-900 transition-colors group-hover:text-emerald-700">name: {proj.name}</p>
                                     <p className="line-clamp-3 text-sm leading-relaxed text-slate-600">description: {proj.description}</p>
                                     <p className={`w-fit rounded-full px-3 py-1 text-xs font-medium uppercase tracking-wide text-white ${proj.status === 'active' ? 'bg-emerald-400' : proj.status === 'archived' ? 'bg-gray-400' : 'bg-blue-400' }`}>status: {proj.status}</p>
                                     <div className="flex gap-x-2 mt-2">
-                                        <button className="logout-btn text-white px-3 py-1 bg-blue-600" onClick={() => handleOpenEditAddModal(proj)}>Edit</button>
-                                        <button className="logout-btn text-white px-3 py-1 bg-red-600" onClick={() =>handleDeleteModal(proj)}>Delete</button>
+                                        <button className="logout-btn text-white px-3 py-1 bg-blue-600" onClick={(e) => {e.stopPropagation(); handleOpenEditAddModal(proj);} }>Edit</button>
+                                        <button className="logout-btn text-white px-3 py-1 bg-red-600" onClick={(e) => {e.stopPropagation(); handleDeleteModal(proj)} }>Delete</button>
                                     </div>
                                     <p className="mt-auto border-t border-slate-100 pt-3 text-xs text-slate-400">createdAt: {proj.createdAt}</p>
                                 </div>
