@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 const Landing = () => {
     return (
-        <div className="min-h-screen w-full bg-[#2f323d] flex flex-col items-center justify-center px-4">
+        <div className="w-full min-h-screen bg-[#2f323d] flex flex-col items-center justify-center px-4">
             <h1 className="text-white font-bold text-center text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
                 პროექტის უკუკავშირი
             </h1>

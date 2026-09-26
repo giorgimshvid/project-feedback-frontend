@@ -5,28 +5,35 @@ import Signup from "../pages/Signup";
 import { Dashboard } from "../pages/Dashboard";
 import { requiredAuthLoader } from "./authLoader";
 import ProjectDetail from "../pages/ProjectDetail";
+import Layout from "../components/Layout";
 
 export const appRouter = createBrowserRouter([
     {
         path: '/',
-        element: <Landing />
+        element: <Layout />,
+        children: [
+            {
+                index: true,
+                element: <Landing />
+            },
+            {
+                path: '/login',
+                element: <Login />
+            },
+            {
+                path: '/signup',
+                element: <Signup />
+            },
+            {
+                path: '/projects/:projectId',
+                loader: requiredAuthLoader,
+                element: <ProjectDetail />
+            },
+            {
+                path: '/dashboard',
+                loader: requiredAuthLoader,
+                element: <Dashboard />
+            }
+        ]
     },
-    {
-        path: '/login',
-        element: <Login />
-    },
-    {
-        path: '/signup',
-        element: <Signup />
-    },
-    {
-        path: '/projects/:projectId',
-        loader: requiredAuthLoader,
-        element: <ProjectDetail />
-    },
-    {
-        path: '/dashboard',
-        loader: requiredAuthLoader,
-        element: <Dashboard />
-    }
 ])

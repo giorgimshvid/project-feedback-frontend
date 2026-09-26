@@ -22,7 +22,7 @@ export const Dashboard = () => {
     const [loadingProject, setloadingProject] = useState<boolean>(false);
     const [projectModal, setProjectModal] = useState<boolean>(false);
 
-    const { user, isAuthenticated, isLoading} = useSelector((state: RootState) => state.auth);
+    const { isAuthenticated, isLoading} = useSelector((state: RootState) => state.auth);
 
     useEffect(() => {
       if (!isLoading && !isAuthenticated) {
@@ -47,16 +47,6 @@ export const Dashboard = () => {
             fetchProjects();
         }
     }, [isAuthenticated]);
-
-    const handleLogout = async () => {
-        try {
-            await authService.logout();
-        } catch(error) {
-            console.log(error);
-        }
-        dispatch(logoutUser())
-        navigate('/login')
-    }
 
     const handleOpenAddModal = () => {
         setProject(null);
@@ -93,17 +83,6 @@ export const Dashboard = () => {
 
     return (
         <>
-            <header className="flex justify-between bg-[#2f323d] py-4 px-7">
-                <div className="user-info flex justify-center gap-x-10 text-white">
-                    <p className="font-bold">User: </p>
-                    <p>{user?.firstName}</p>
-                    <p>{user?.lastName}</p>
-                    <p>{user?.email}</p>
-                </div>
-                <div className="logout-btn text-white px-4 py-2 bg-emerald-600">
-                   <button onClick={handleLogout}>Logout</button>
-                </div>
-            </header>
             <main className="min-h-screen bg-slate-50 pt-6 px-6 pb-12">
                 <div className="mx-auto max-w-7xl">
                     <div className="add-btn-wrap flex justify-center">
