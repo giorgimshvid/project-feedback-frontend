@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { email, z } from "zod";
 
 export const signupValidationSchema = z.object({
   firstName: z
@@ -55,3 +55,24 @@ export const projectValidationSchema = z.object({
     .string({ error: "Status is required" })
     .trim()
 });
+
+
+export const memberValidationSchema = z.object({
+  firstName: z
+    .string({ error: "First Name is required." })
+    .min(2, { message: 'The First Name must be minimum 3 characters.' })
+    .max(20, { message: 'The First Name must not be more than 20 characters.' })
+    .trim(),
+  lastName: z
+    .string({ error: "First Name is required." })
+    .min(2, { message: 'The First Name must be minimum 3 characters.' })
+    .max(20, { message: 'The First Name must not be more than 20 characters.' })
+    .trim(),
+  email: z
+    .email({ message: "Please add a valid E-Mail format." })
+		.min(1, { message: "The E-Mail is required. Please." }),
+  position: z
+    .string( {error: "First Positon is required."} )
+    .min(2, { message: 'The Positon must be minimum 3 characters.' })
+    .trim(),
+})

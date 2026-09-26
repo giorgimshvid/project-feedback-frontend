@@ -13,6 +13,7 @@ export interface MemberRequest {
     firstName: string
     lastName: string
     position: string
+    role?: string
 }
 
 export interface MemberResponse {

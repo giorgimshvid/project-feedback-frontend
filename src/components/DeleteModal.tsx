@@ -1,12 +1,12 @@
 import Button from "../shared/ui/Button";
 
 interface DeleteModalProps {
-    projectName: string;
+    name: string;
     onClose: (projectDeleteModal: boolean) => void;
     onConfirm: () => void;
 }
 
-const DeleteModal = ({ projectName, onClose, onConfirm }: DeleteModalProps) => {
+const DeleteModal = ({ name, onClose, onConfirm }: DeleteModalProps) => {
     return (
         <>
             <div className="flex flex-col items-center justify-center p-4 absolute z-10 inset-0">
@@ -18,10 +18,10 @@ const DeleteModal = ({ projectName, onClose, onConfirm }: DeleteModalProps) => {
                     ✖
                 </div>
                 <h2>
-                    { projectName }
+                    { name }
                 </h2>
                 <div className="modal-content relative z-10">
-                    <h3 className="text-white text-2xl mb-6">Are you sure you want to delete the project card?</h3>
+                    <h3 className="text-white text-2xl mb-6">Are you sure you want to delete?</h3>
                     <div className="flex gap-x-4">
                         <Button 
                             type="button"

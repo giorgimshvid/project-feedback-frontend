@@ -26,7 +26,6 @@ const ProjectModal = ({ onClose, isOpened, onProjectSave, project }: ProjectModa
         onSubmit: async (value: ProjectRequest, { setStatus, setSubmitting, resetForm }) => {
             try {
                 if (project) {
-                    console.log(111111111111111111111);
                     await projectService.editProject(project.id, value);
                 } else {
                     await projectService.createProject(value);

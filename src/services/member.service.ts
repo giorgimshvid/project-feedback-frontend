@@ -2,7 +2,7 @@ import type { Member, MemberEditResponse, MemberRequest, MemberResponse } from "
 import { request } from "./app.client";
 
 class MemberService {
-    async getmembers(projectId: number): Promise<Member[]> {
+    async getMembers(projectId: number): Promise<Member[]> {
         return request<Member[]>(`api/projects/${projectId}/members`, {
             method: "GET"
         });

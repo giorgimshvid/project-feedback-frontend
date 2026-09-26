@@ -1,18 +1,15 @@
 
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import type { RootState } from "../store/store";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { projectService } from "../services/project.service";
 import type { Project } from "../models/ProjectProps";
-import { logoutUser } from "../store/slices/authSlice";
-import { authService } from "../services/auth.service";
 import ProjectModal from "../components/ProjectModal";
 import DeleteModal from "../components/DeleteModal";
 
 export const Dashboard = () => {
 
-    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const [projects, setProjects] = useState<Project[]>([]);
@@ -123,7 +120,7 @@ export const Dashboard = () => {
             {
                 deleteModalOpened && 
                 <DeleteModal 
-                    projectName={projectToDelete?.name ?? ''}
+                    name={projectToDelete?.name ?? ''}
                     onClose={() => setDeleteModalOpened(false)}
                     onConfirm={confirmDelete}
                 />
